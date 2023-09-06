@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoJDBCImpl implements UserDao {
-    private Connection connection;
+//    private Connection connection;
 
     public UserDaoJDBCImpl() {
     }
@@ -16,14 +16,16 @@ public class UserDaoJDBCImpl implements UserDao {
     //Создание базы данных
     public void createUsersTable() {
         boolean haveTable = false;
-        String sql = "CREATE TABLE `mydbtest`.`user` (\n" +
-                "  `id` INT NOT NULL AUTO_INCREMENT,\n" +
-                "  `name` VARCHAR(45) NULL,\n" +
-                "  `lastname` VARCHAR(45) NULL,\n" +
-                "  `age` INT NULL,\n" +
-                "  PRIMARY KEY (`id`));\n";
-        try {
-            connection = new Util().getConnection();
+        String sql = """
+                CREATE TABLE `user` (
+                  `id` INT NOT NULL AUTO_INCREMENT,
+                  `name` VARCHAR(45) NULL,
+                  `lastname` VARCHAR(45) NULL,
+                  `age` INT NULL,
+                  PRIMARY KEY (`id`));
+                """;
+        try (Connection connection = new Util().getConnection()) {
+//            connection = new Util().getConnection();
             DatabaseMetaData databaseMetaData = connection.getMetaData();
             ResultSet resultSet = databaseMetaData.getTables("mydbtest", null, null, new String[]{});
             while (resultSet.next()) {
@@ -39,17 +41,18 @@ public class UserDaoJDBCImpl implements UserDao {
                 stmt.executeUpdate(sql);
                 System.out.println("create table");
                 connection.commit();
-                connection.close();
             }
         } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
+
 
     //удаление базы даных
     public void dropUsersTable() {
         String sql = "DROP TABLE user";
-        try {
-            connection = new Util().getConnection();
+        try (Connection connection = new Util().getConnection()) {
+//            connection = new Util().getConnection();
             Statement stmt = connection.createStatement();
             connection.setAutoCommit(false);
             stmt.executeUpdate(sql);
@@ -64,13 +67,12 @@ public class UserDaoJDBCImpl implements UserDao {
     //сохранение пользователя
     public void saveUser(String name, String lastName, byte age) {
 
-        Statement stmt = null;
         String sql = "Insert into user (age, lastName, name) values(?,?,?)";
-        try {
-            connection = new Util().getConnection();
+        try (Connection connection = new Util().getConnection()) {
+//            connection = new Util().getConnection();
             connection.setAutoCommit(false);
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, (int) age);
+            preparedStatement.setInt(1, age);
             preparedStatement.setString(2, lastName);
             preparedStatement.setString(3, name);
             preparedStatement.execute();
@@ -85,16 +87,12 @@ public class UserDaoJDBCImpl implements UserDao {
 
     //удаление пользователя по id
     public void removeUserById(long id) {
-        PreparedStatement preparedStatement;
         String sql = "DELETE FROM user WHERE id = " + id;
-        try {
-            connection = new Util().getConnection();
-            Statement stmt = connection.createStatement();
+        try (Connection connection = new Util().getConnection()) {
+//            connection = new Util().getConnection();
             connection.setAutoCommit(false);
-            stmt.executeUpdate(sql);
-            System.out.println("you remove user by id");
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
             connection.commit();
-            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -105,8 +103,8 @@ public class UserDaoJDBCImpl implements UserDao {
         List<User> user = new ArrayList<>();
         Statement stmt;
         String sql = "SELECT age, lastname, name from user";
-        try {
-            connection = new Util().getConnection();
+        try (Connection connection = new Util().getConnection()) {
+//            connection = new Util().getConnection();
             connection.setAutoCommit(false);
             stmt = connection.createStatement();
             ResultSet result = stmt.executeQuery(sql);
@@ -114,7 +112,6 @@ public class UserDaoJDBCImpl implements UserDao {
                 user.add(new User(result.getString("name"), result.getString("lastname"), result.getByte("age")));
             }
             connection.commit();
-            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -125,8 +122,8 @@ public class UserDaoJDBCImpl implements UserDao {
     public void cleanUsersTable() {
         String sql = "DELETE FROM user";
         Statement stmt;
-        try {
-            connection = new Util().getConnection();
+        try (Connection connection = new Util().getConnection()) {
+//            connection = new Util().getConnection();
             connection.setAutoCommit(false);
             stmt = connection.createStatement();
             stmt.executeUpdate(sql);
