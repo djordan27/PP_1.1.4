@@ -3,13 +3,16 @@ package jm.task.core.jdbc.dao;
 import jm.task.core.jdbc.model.User;
 import jm.task.core.jdbc.util.Util;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DatabaseMetaData;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoJDBCImpl implements UserDao {
-//    private Connection connection;
-
     public UserDaoJDBCImpl() {
     }
 
@@ -24,8 +27,7 @@ public class UserDaoJDBCImpl implements UserDao {
                   `age` INT NULL,
                   PRIMARY KEY (`id`));
                 """;
-        try (Connection connection = new Util().getConnection()) {
-//            connection = new Util().getConnection();
+        try (Connection connection = new Util().getInstance().getConnection()) {
             DatabaseMetaData databaseMetaData = connection.getMetaData();
             ResultSet resultSet = databaseMetaData.getTables("mydbtest", null, null, new String[]{});
             while (resultSet.next()) {
@@ -51,7 +53,7 @@ public class UserDaoJDBCImpl implements UserDao {
     //удаление базы даных
     public void dropUsersTable() {
         String sql = "DROP TABLE user";
-        try (Connection connection = new Util().getConnection()) {
+        try (Connection connection = new Util().getInstance().getConnection()) {
 //            connection = new Util().getConnection();
             Statement stmt = connection.createStatement();
             connection.setAutoCommit(false);
@@ -68,8 +70,7 @@ public class UserDaoJDBCImpl implements UserDao {
     public void saveUser(String name, String lastName, byte age) {
 
         String sql = "Insert into user (age, lastName, name) values(?,?,?)";
-        try (Connection connection = new Util().getConnection()) {
-//            connection = new Util().getConnection();
+        try (Connection connection = new Util().getInstance().getConnection()) {
             connection.setAutoCommit(false);
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, age);
@@ -88,8 +89,7 @@ public class UserDaoJDBCImpl implements UserDao {
     //удаление пользователя по id
     public void removeUserById(long id) {
         String sql = "DELETE FROM user WHERE id = " + id;
-        try (Connection connection = new Util().getConnection()) {
-//            connection = new Util().getConnection();
+        try (Connection connection = new Util().getInstance().getConnection()) {
             connection.setAutoCommit(false);
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             connection.commit();
@@ -103,8 +103,7 @@ public class UserDaoJDBCImpl implements UserDao {
         List<User> user = new ArrayList<>();
         Statement stmt;
         String sql = "SELECT age, lastname, name from user";
-        try (Connection connection = new Util().getConnection()) {
-//            connection = new Util().getConnection();
+        try (Connection connection = new Util().getInstance().getConnection()) {
             connection.setAutoCommit(false);
             stmt = connection.createStatement();
             ResultSet result = stmt.executeQuery(sql);
@@ -122,8 +121,7 @@ public class UserDaoJDBCImpl implements UserDao {
     public void cleanUsersTable() {
         String sql = "DELETE FROM user";
         Statement stmt;
-        try (Connection connection = new Util().getConnection()) {
-//            connection = new Util().getConnection();
+        try (Connection connection = new Util().getInstance().getConnection()) {
             connection.setAutoCommit(false);
             stmt = connection.createStatement();
             stmt.executeUpdate(sql);

@@ -4,21 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="627c4abe-2032-4ec8-8bb4-c2d007f13e16" name="Changes" comment="Изменений:&#10;1)UserDaoJDBCImpl userDaoJDBC = new UserDaoJDBCImpl(); - Используем полиморфизм, слева UserDao userDao и тогда в &#10;2) Убрал Connection connection = getConnection(); - из  UserServiceImpl.&#10;3) Util сделал ленивым синглтоном. &#10;4) connection.close() - использовал трай с ресурсами&#10;5) в removeUserById переключился на  preparedStatement, чтобы избежать уязвимостей SQL-инъекции&#10;6) переписал  Main на использования userService.">
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_06_09_2023_18_13_[Changes]/Main.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_06_09_2023_18_13_[Changes]/User.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_06_09_2023_18_13_[Changes]/UserDao.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_06_09_2023_18_13_[Changes]/UserService.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_06_09_2023_18_13_[Changes]/Util.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_06_09_2023_18_13_[Changes]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/jm/task/core/jdbc/dao/UserDaoJDBCImpl.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/jm/task/core/jdbc/service/UserServiceImpl.class" afterDir="false" />
+    <list default="true" id="627c4abe-2032-4ec8-8bb4-c2d007f13e16" name="Changes" comment="gitignore">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/jm/task/core/jdbc/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jm/task/core/jdbc/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/jm/task/core/jdbc/dao/UserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jm/task/core/jdbc/dao/UserDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/jm/task/core/jdbc/dao/UserDaoJDBCImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jm/task/core/jdbc/dao/UserDaoJDBCImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/jm/task/core/jdbc/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jm/task/core/jdbc/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/jm/task/core/jdbc/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jm/task/core/jdbc/service/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/jm/task/core/jdbc/service/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jm/task/core/jdbc/service/UserServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/jm/task/core/jdbc/util/Util.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jm/task/core/jdbc/util/Util.java" afterDir="false" />
     </list>
@@ -71,7 +60,8 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "last_directory_selection": "C:/Users/djordan/Desktop/homeWork/PP_1_1_3-4_JDBC_Hibernate-master/src/main/java",
-    "last_opened_file_path": "C:/Users/djordan/Desktop/homeWork/PP_1_1_3-4_JDBC_Hibernate-master"
+    "last_opened_file_path": "C:/Users/djordan/Desktop/homeWork/PP_1_1_3-4_JDBC_Hibernate-master",
+    "settings.editor.selected.configurable": "preferences.sourceCode.Java"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -125,7 +115,35 @@
       <option name="project" value="LOCAL" />
       <updated>1694013127459</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="gitignore">
+      <created>1694014997436</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1694014997436</updated>
+    </task>
+    <task id="LOCAL-00003" summary="gitignore">
+      <created>1694015046004</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1694015046004</updated>
+    </task>
+    <task id="LOCAL-00004" summary="gitignore">
+      <created>1694015121734</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1694015121734</updated>
+    </task>
+    <task id="LOCAL-00005" summary="gitignore">
+      <created>1694015348842</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1694015348842</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -141,6 +159,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Изменений:&#10;1)UserDaoJDBCImpl userDaoJDBC = new UserDaoJDBCImpl(); - Используем полиморфизм, слева UserDao userDao и тогда в &#10;2) Убрал Connection connection = getConnection(); - из  UserServiceImpl.&#10;3) Util сделал ленивым синглтоном. &#10;4) connection.close() - использовал трай с ресурсами&#10;5) в removeUserById переключился на  preparedStatement, чтобы избежать уязвимостей SQL-инъекции&#10;6) переписал  Main на использования userService." />
-    <option name="LAST_COMMIT_MESSAGE" value="Изменений:&#10;1)UserDaoJDBCImpl userDaoJDBC = new UserDaoJDBCImpl(); - Используем полиморфизм, слева UserDao userDao и тогда в &#10;2) Убрал Connection connection = getConnection(); - из  UserServiceImpl.&#10;3) Util сделал ленивым синглтоном. &#10;4) connection.close() - использовал трай с ресурсами&#10;5) в removeUserById переключился на  preparedStatement, чтобы избежать уязвимостей SQL-инъекции&#10;6) переписал  Main на использования userService." />
+    <MESSAGE value="gitignore" />
+    <option name="LAST_COMMIT_MESSAGE" value="gitignore" />
   </component>
 </project>

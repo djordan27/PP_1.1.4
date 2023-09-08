@@ -1,12 +1,15 @@
 package jm.task.core.jdbc.util;
 
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.Driver;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public  class Util {
     private  static volatile Util instance;
     private static final String URL = "jdbc:mysql://localhost:3306/mydbtest";
-    //private static final String URL = "jdbc:mysql://localhost:3306/mydbtest?autoReconnect=true&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "root";
     private Connection connection;
@@ -29,7 +32,6 @@ public  class Util {
             connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
             Statement statement = connection.createStatement();
             statement.getConnection();
-//            System.out.println(connection.isClosed());
         }
         catch (SQLException e1) {
             System.out.println("Драйвер не зарегистрировался" + e1.getErrorCode() + e1.getSQLState() + e1.getLocalizedMessage());
