@@ -27,7 +27,7 @@ public class UserDaoJDBCImpl implements UserDao {
                   `age` INT NULL,
                   PRIMARY KEY (`id`));
                 """;
-        try (Connection connection = new Util().getInstance().getConnection()) {
+        try (Connection connection = Util.getInstance().getConnection()) {
             DatabaseMetaData databaseMetaData = connection.getMetaData();
             ResultSet resultSet = databaseMetaData.getTables("mydbtest", null, null, new String[]{});
             while (resultSet.next()) {
@@ -37,7 +37,7 @@ public class UserDaoJDBCImpl implements UserDao {
                     haveTable = true;
                 }
             }
-            if (haveTable == false) {
+            if (!haveTable) {
                 Statement stmt = connection.createStatement();
                 connection.setAutoCommit(false);
                 stmt.executeUpdate(sql);
@@ -53,8 +53,7 @@ public class UserDaoJDBCImpl implements UserDao {
     //удаление базы даных
     public void dropUsersTable() {
         String sql = "DROP TABLE user";
-        try (Connection connection = new Util().getInstance().getConnection()) {
-//            connection = new Util().getConnection();
+        try (Connection connection = Util.getInstance().getConnection()) {
             Statement stmt = connection.createStatement();
             connection.setAutoCommit(false);
             stmt.executeUpdate(sql);
@@ -70,7 +69,7 @@ public class UserDaoJDBCImpl implements UserDao {
     public void saveUser(String name, String lastName, byte age) {
 
         String sql = "Insert into user (age, lastName, name) values(?,?,?)";
-        try (Connection connection = new Util().getInstance().getConnection()) {
+        try (Connection connection = Util.getInstance().getConnection()) {
             connection.setAutoCommit(false);
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, age);
@@ -78,7 +77,6 @@ public class UserDaoJDBCImpl implements UserDao {
             preparedStatement.setString(3, name);
             preparedStatement.execute();
             connection.commit();
-            connection.close();
             System.out.println("save user is successfull");
         } catch (SQLException e) {
             e.printStackTrace();
@@ -89,7 +87,7 @@ public class UserDaoJDBCImpl implements UserDao {
     //удаление пользователя по id
     public void removeUserById(long id) {
         String sql = "DELETE FROM user WHERE id = " + id;
-        try (Connection connection = new Util().getInstance().getConnection()) {
+        try (Connection connection = Util.getInstance().getConnection()) {
             connection.setAutoCommit(false);
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             connection.commit();
@@ -103,7 +101,7 @@ public class UserDaoJDBCImpl implements UserDao {
         List<User> user = new ArrayList<>();
         Statement stmt;
         String sql = "SELECT age, lastname, name from user";
-        try (Connection connection = new Util().getInstance().getConnection()) {
+        try (Connection connection = Util.getInstance().getConnection()) {
             connection.setAutoCommit(false);
             stmt = connection.createStatement();
             ResultSet result = stmt.executeQuery(sql);
@@ -121,7 +119,7 @@ public class UserDaoJDBCImpl implements UserDao {
     public void cleanUsersTable() {
         String sql = "DELETE FROM user";
         Statement stmt;
-        try (Connection connection = new Util().getInstance().getConnection()) {
+        try (Connection connection = Util.getInstance().getConnection()) {
             connection.setAutoCommit(false);
             stmt = connection.createStatement();
             stmt.executeUpdate(sql);
