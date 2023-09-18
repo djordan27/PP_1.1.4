@@ -2,9 +2,7 @@ package jm.task.core.jdbc.dao;
 
 import jm.task.core.jdbc.model.User;
 import jm.task.core.jdbc.util.Util;
-
 import java.sql.Connection;
-import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,9 +16,8 @@ public class UserDaoJDBCImpl implements UserDao {
 
     //Создание базы данных
     public void createUsersTable() {
-        boolean haveTable = false;
         String sql = """
-                CREATE TABLE `user` (
+                CREATE TABLE IF NOT EXISTS`user` (
                   `id` INT NOT NULL AUTO_INCREMENT,
                   `name` VARCHAR(45) NULL,
                   `lastname` VARCHAR(45) NULL,
@@ -28,24 +25,12 @@ public class UserDaoJDBCImpl implements UserDao {
                   PRIMARY KEY (`id`));
                 """;
         try (Connection connection = Util.getInstance().getConnection()) {
-            DatabaseMetaData databaseMetaData = connection.getMetaData();
-            ResultSet resultSet = databaseMetaData.getTables("mydbtest", null, null, new String[]{});
-            while (resultSet.next()) {
-                String name = resultSet.getString("TABLE_NAME");
-                if (name.equals("user")) {
-                    System.out.println("you just have this table");
-                    haveTable = true;
-                }
-            }
-            if (!haveTable) {
-                Statement stmt = connection.createStatement();
-                connection.setAutoCommit(false);
-                stmt.executeUpdate(sql);
-                System.out.println("create table");
-                connection.commit();
-            }
+            Statement stmt = connection.createStatement();
+            connection.setAutoCommit(false);
+            stmt.executeUpdate(sql);
+            System.out.println("create table");
+
         } catch (SQLException e) {
-            e.printStackTrace();
         }
     }
 
@@ -58,7 +43,6 @@ public class UserDaoJDBCImpl implements UserDao {
             connection.setAutoCommit(false);
             stmt.executeUpdate(sql);
             connection.commit();
-            connection.close();
             System.out.println("you delate your table");
         } catch (SQLException e) {
             System.out.println("You can't delete this table");
@@ -124,7 +108,6 @@ public class UserDaoJDBCImpl implements UserDao {
             stmt = connection.createStatement();
             stmt.executeUpdate(sql);
             connection.commit();
-            connection.close();
             System.out.println("you clean your table");
         } catch (SQLException e) {
             e.printStackTrace();
