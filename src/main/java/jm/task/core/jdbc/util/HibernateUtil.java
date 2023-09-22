@@ -1,7 +1,6 @@
 package jm.task.core.jdbc.util;
 
 import java.util.Properties;
-
 import jm.task.core.jdbc.model.User;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
